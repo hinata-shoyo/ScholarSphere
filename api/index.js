@@ -3,12 +3,13 @@ require("dotenv").config();
 const { connectdb } = require("./db/config.js");
 const cors = require("cors")
 const app = express();
+const UserRouter = require("./routes/user.js")
 const corsOption = {
   origin: "*",
   allowedHeaders: ["Authorization", "Content-Type"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
-
+app.use("/user", UserRouter)
 app.use(cors(corsOption))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
