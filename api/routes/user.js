@@ -29,6 +29,11 @@ const giveCurrentDateTime = () => {
   return dateTime;
 };
 
+Router.get("/", authUser, async (req, res) => {
+  const user = await User.findOne({ username: req.username });
+  res.json({ user });
+});
+
 Router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -62,30 +67,88 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.get("/posts", async (req, res) => {});
+Router.get("/posts", authUser, async (req, res) => {
+  const user = await User.findOne({
+    username: req.username,
+  });
+  res.json({ Posts: user.posts });
+});
 
 Router.post("/post", authUser, upload.single("file"), async (req, res) => {
-  const { title, description} = req.body;
+  const { title, description } = req.body;
   const dateTime = giveCurrentDateTime();
   const storageref = ref(
     storage,
     `Posts/${req.file.originalname + "       " + dateTime}`
   );
   const metadata = {
-    contentType:req.file.mimetype
-  }
-  const snapshot = await uploadBytesResumable(storageref, req.file.buffer, metadata)
+    contentType: req.file.mimetype,
+  };
+  const snapshot = await uploadBytesResumable(
+    storageref,
+    req.file.buffer,
+    metadata
+  );
+  const photo = await getDownloadURL(snapshot.ref);
+  console.log("file uploaded successfully");
+  const userr = await User.findOne({ username: req.username });
+  const time = new Date();
+  const posts = [
+    ...userr.posts,
+    { title: title, description: description, photo: photo, time: time },
+  ];
+  const user = await User.findOneAndUpdate(
+    { username: req.username },
+    { posts: posts }
+  );
+  user
+    .save()
+    .then(
+      res.json({
+        msg: "successfully uploaded",
+        data: { name: req.file.originalname, type: req.file.mimetype, photo },
+      })
+    )
+    .catch((e) => {
+      console.log(e);
+    });
+});
+
+Router.put("/update", authUser, upload.single("file"), async (req, res) => {
+  const { firstName, lastName, university } = req.body;
+  const dateTime = giveCurrentDateTime();
+  const storageref = ref(
+    storage,
+    `Profile pictures/${req.file.originalname + "     " + dateTime}`
+  );
+  const metadata = {
+    contentType: req.file.mimetype,
+  };
+  const snapshot = await uploadBytesResumable(
+    storageref,
+    req.file.buffer,
+    metadata
+  );
   const photo = await getDownloadURL(snapshot.ref)
-  console.log("file uploaded successfully")
-  const userr = await User.findOne({username:req.username})
-  const time = new Date()
-  const posts = [...userr.posts, {title:title, description:description, photo:photo, time:time}]
-  const user = await User.findOneAndUpdate({username:req.username},{posts:posts})
-  user.save().then(
-    res.json({msg:"successfully uploaded", data : { name: req.file.originalname, type: req.file.mimetype, photo}})
-    ).catch((e) => {
-      console.log(e)
-    })
+  const user = await User.findOneAndUpdate(
+    { username: req.username },
+    {
+      firstName: firstName,
+      lastName: lastName,
+      university: university,
+      profilePicture: photo,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  user
+    .save()
+    .then(res.json({ msg: "user updated" }))
+    .catch((e) => {
+      console.error();
+    });
 });
 
 module.exports = Router;
