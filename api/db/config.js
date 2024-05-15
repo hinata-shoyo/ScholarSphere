@@ -1,4 +1,3 @@
-// import mongoose from "mongoose";
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -33,8 +32,17 @@ const userSchema = new mongoose.Schema(
     university: {
       type: String,
     },
-    posts: [
-      {
+  },
+  {
+    versionKey: false,
+  }
+);
+
+const postSchema = new mongoose.Schema(
+  {
+        user: {
+          type: String,
+        },
         title: {
           type: String,
         },
@@ -51,9 +59,7 @@ const userSchema = new mongoose.Schema(
         time: {
           type: Date,
         },
-        comments: [{ comment: { type: String }, user: { String } }],
-      },
-    ],
+        comments: [{ comment: { type: String }, by: { type:String } }],
   },
   {
     versionKey: false,
@@ -61,5 +67,6 @@ const userSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", userSchema);
+const Post = mongoose.model("Post", postSchema);
 
-module.exports = { connectdb, User };
+module.exports = { connectdb, User, Post };

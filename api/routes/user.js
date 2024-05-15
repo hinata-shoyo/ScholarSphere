@@ -13,7 +13,7 @@ const Router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authUser = require("../middlewares/Auth.js");
-const { User } = require("../db/config.js");
+const { User, Post } = require("../db/config.js");
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -67,11 +67,48 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.get("/posts", authUser, async (req, res) => {
-  const user = await User.findOne({
-    username: req.username,
+Router.put("/like/:id", authUser, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  post.likes++;
+  post.save();
+  res.json({ msg: "success" });
+});
+
+Router.put("/unlike/:id", authUser, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  post.likes--;
+  post.save();
+  res.json({ msg: "success" });
+});
+
+Router.get("/posts/:id", authUser, async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const posts = Post.find({ user: user._id });
+  res.json({ posts });
+});
+
+Router.put("/comment/:id", authUser, async (req, res) => {
+  const comment = req.body.comment;
+  console.log(req.body)
+  const post = await Post.findById(req.params.id);
+  const comments = [...post.comments, { comment:comment, by: req.username }];
+  const newPost = await Post.findByIdAndUpdate(req.params.id, {
+    comments: comments,
   });
-  res.json({ Posts: user.posts });
+  newPost
+    .save()
+    .then(res.json({ msg: "success" }))
+    .catch((e) => console.log(e));
+});
+
+Router.get("/comments/:id", authUser, async (req, res) => {
+  const post =await  Post.findById(req.params.id)
+  res.json({comments:post.comments})
+});
+
+Router.get("/posts", authUser, async (req, res) => {
+  const posts = await Post.find();
+  res.json({ posts });
 });
 
 Router.post("/post", authUser, upload.single("file"), async (req, res) => {
@@ -91,17 +128,16 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
   );
   const photo = await getDownloadURL(snapshot.ref);
   console.log("file uploaded successfully");
-  const userr = await User.findOne({ username: req.username });
+  const userr = await Post.findOne({ username: req.username });
   const time = new Date();
-  const posts = [
-    ...userr.posts,
-    { title: title, description: description, photo: photo, time: time },
-  ];
-  const user = await User.findOneAndUpdate(
-    { username: req.username },
-    { posts: posts }
-  );
-  user
+  const post = await Post.create({
+    title,
+    description,
+    photo,
+    time,
+    user: req.username,
+  });
+  post
     .save()
     .then(
       res.json({
@@ -129,7 +165,7 @@ Router.put("/update", authUser, upload.single("file"), async (req, res) => {
     req.file.buffer,
     metadata
   );
-  const photo = await getDownloadURL(snapshot.ref)
+  const photo = await getDownloadURL(snapshot.ref);
   const user = await User.findOneAndUpdate(
     { username: req.username },
     {
