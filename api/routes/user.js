@@ -1,9 +1,33 @@
 const express = require("express");
+const { initializeApp } = require("firebase/app");
+const {
+  ref,
+  getStorage,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} = require("firebase/storage");
+const multer = require("multer");
+const firebaseConfig = require("../firebase/cloud.js");
 const Router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authUser = require("../middleware/Auth.js");
+const authUser = require("../middlewares/Auth.js");
 const { User } = require("../db/config.js");
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+const upload = multer({ storage: multer.memoryStorage() });
+
+const giveCurrentDateTime = () => {
+  const today = new Date();
+  const date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  const time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const dateTime = date + " " + time;
+  return dateTime;
+};
 
 Router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
@@ -38,10 +62,30 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.get("/posts", async (req, res) => {
+Router.get("/posts", async (req, res) => {});
 
-})
+Router.post("/post", authUser, upload.single("file"), async (req, res) => {
+  const { title, description} = req.body;
+  const dateTime = giveCurrentDateTime();
+  const storageref = ref(
+    storage,
+    `Posts/${req.file.originalname + "       " + dateTime}`
+  );
+  const metadata = {
+    contentType:req.file.mimetype
+  }
+  const snapshot = await uploadBytesResumable(storageref, req.file.buffer, metadata)
+  const photo = await getDownloadURL(snapshot.ref)
+  console.log("file uploaded successfully")
+  const userr = await User.findOne({username:req.username})
+  const time = new Date()
+  const posts = [...userr.posts, {title:title, description:description, photo:photo, time:time}]
+  const user = await User.findOneAndUpdate({username:req.username},{posts:posts})
+  user.save().then(
+    res.json({msg:"successfully uploaded", data : { name: req.file.originalname, type: req.file.mimetype, photo}})
+    ).catch((e) => {
+      console.log(e)
+    })
+});
 
-
-
-module.exports = Router
+module.exports = Router;

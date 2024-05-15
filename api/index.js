@@ -9,10 +9,10 @@ const corsOption = {
   allowedHeaders: ["Authorization", "Content-Type"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
-app.use("/user", UserRouter)
 app.use(cors(corsOption))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/user", UserRouter)
 
 app.get("/", (req, res) => {
   res.json({
