@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* overflow:scroll; */
+}
+
+.containerr{
+    background-color:#02141c;
+}
+
+.walll{
+    z-index: -100;
+    margin-left: 28vw;
+    margin-top: 200px;
+}
+
+

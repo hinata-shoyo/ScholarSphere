@@ -107,12 +107,19 @@ Router.get("/comments/:id", authUser, async (req, res) => {
 });
 
 Router.get("/posts", authUser, async (req, res) => {
-  const posts = await Post.find();
-  res.json({ posts });
+  // console.log("here")
+  try {
+    const posts = await Post.find();
+    res.json({ posts });
+    
+  } catch (error) {
+   res.json({msg: error}) 
+  }
 });
 
 Router.post("/post", authUser, upload.single("file"), async (req, res) => {
-  const { title, description } = req.body;
+  const { description } = req.body;
+  const user = await User.findOne({username:req.username})
   const dateTime = giveCurrentDateTime();
   const storageref = ref(
     storage,
@@ -131,11 +138,11 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
   const userr = await Post.findOne({ username: req.username });
   const time = new Date();
   const post = await Post.create({
-    title,
     description,
     photo,
     time,
     user: req.username,
+    propilePic:user.profilePicture
   });
   post
     .save()

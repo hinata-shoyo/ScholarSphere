@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default: "",
+      default: "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
     },
     firstName: {
       type: String,
@@ -43,8 +43,8 @@ const postSchema = new mongoose.Schema(
         user: {
           type: String,
         },
-        title: {
-          type: String,
+        profilePic:{
+          type:String,
         },
         description: {
           type: String,
@@ -55,6 +55,7 @@ const postSchema = new mongoose.Schema(
         },
         photo: {
           type: String,
+          default:null
         },
         time: {
           type: Date,
