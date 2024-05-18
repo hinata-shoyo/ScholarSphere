@@ -2,48 +2,43 @@ import "./Navbar.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Navbar = (props) => {
-
-  const [image, setImage] = useState("")
+const Navbar = () => {
+  const [image, setImage] = useState("");
 
   const handleLogout = () => {
-  window.localStorage.removeItem('token')
-  window.location.href ="/"
-  }
-
-  var picture;
+    window.localStorage.removeItem("token");
+    window.location.href = "/";
+  };
 
   const getUser = async () => {
     try {
-        const response = await axios.get("http://localhost:3000/user/",
-        {
-            headers:{
-                Authorization: `bearer ${window.localStorage.getItem("token")}`
-            }
-        })
-        picture = response.data.user.profilePicture
-        setImage(picture)
+      const response = await axios.get("http://localhost:3000/user/", {
+        headers: {
+          Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+      setImage(response.data.user.profilePicture);
     } catch (error) {
-        console.log(error.response.msg)
-        
+      console.log(error.response.msg);
     }
-  }
+  };
 
   useEffect(() => {
-    getUser()
+    getUser();
   }, []);
 
   return (
     <div className="navbar">
       <div className="logoContainer">
         <a href="/">
-
-        <img className="logo" src="/Untitled.jpg" alt="logo" />
+          <img src="/Untitled.jpg" alt="logo" className="logo" />
         </a>
       </div>
       <div className="rightCon">
-        <button onClick={handleLogout} className="logout">Logout</button>
-        <img className="pfp2" src={image} alt="pfp" />
+        <button onClick={handleLogout} className="logout">
+          Logout
+        </button>
+        <img src={image} alt="pfp" className="pfp2" />
       </div>
     </div>
   );

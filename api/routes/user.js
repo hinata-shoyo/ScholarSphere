@@ -34,6 +34,11 @@ Router.get("/", authUser, async (req, res) => {
   res.json({ user });
 });
 
+Router.get("/:id", authUser, async (req, res) => {
+  const user = await User.findById(req.params.id)
+  res.json({user})
+})
+
 Router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -107,7 +112,6 @@ Router.get("/comments/:id", authUser, async (req, res) => {
 });
 
 Router.get("/posts", authUser, async (req, res) => {
-  // console.log("here")
   try {
     const posts = await Post.find();
     res.json({ posts });
@@ -142,6 +146,7 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
     photo,
     time,
     user: req.username,
+    userId: user._id,
     propilePic:user.profilePicture
   });
   post

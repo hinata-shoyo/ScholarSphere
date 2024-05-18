@@ -15,6 +15,7 @@ const Home = (props) => {
           Authorization: `bearer ${window.localStorage.getItem("token")}`,
         },
       });
+      // console.log
       console.log(response.data.posts);
       setPosts(response.data.posts)
     } catch (error) {
@@ -33,11 +34,11 @@ const Home = (props) => {
   return (
     <div className="containerr">
       <Navbar />
-      <div style={{ height: "10px" }}></div>
+      <div style={{ height: "1px" }}></div>
       <div className="walll">
         {posts.map((post) => {
           return(
-            <Post pfp={post.profilePic} user={post.user} post={post.description} time={post.time} photo={post.photo}/>
+            <Post pfp={"/profile.png"} user={post.user} post={post.description} time={post.time} photo={post.photo} id={post.userId}/>
           )
         })}
       </div>
