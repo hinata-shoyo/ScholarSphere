@@ -12,14 +12,14 @@ const Navbar = () => {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/user/", {
+      const response = await axios.get("http://localhost:3000/user", {
         headers: {
           Authorization: `bearer ${window.localStorage.getItem("token")}`,
         },
       });
       setImage(response.data.user.profilePicture);
     } catch (error) {
-      console.log(error.response.msg);
+      console.log(error);
     }
   };
 

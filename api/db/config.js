@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -17,7 +18,8 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default: "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+      default:
+        "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
     },
     firstName: {
       type: String,
@@ -31,6 +33,7 @@ const userSchema = new mongoose.Schema(
     },
     university: {
       type: String,
+      default: "",
     },
   },
   {
@@ -40,30 +43,30 @@ const userSchema = new mongoose.Schema(
 
 const postSchema = new mongoose.Schema(
   {
-        user: {
-          type: String,
-        },
-        userId:{
-          type:String
-        },
-        profilePic:{
-          type:String,
-        },
-        description: {
-          type: String,
-        },
-        likes: {
-          type: Number,
-          default: 0,
-        },
-        photo: {
-          type: String,
-          default:null
-        },
-        time: {
-          type: Date,
-        },
-        comments: [{ comment: { type: String }, by: { type:String } }],
+    user: {
+      type: String,
+    },
+    userId: {
+      type: ObjectId,
+    },
+    profilePic: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    photo: {
+      type: String,
+      default: null,
+    },
+    time: {
+      type: Date,
+    },
+    comments: [{ comment: { type: String }, by: { type: String } }],
   },
   {
     versionKey: false,

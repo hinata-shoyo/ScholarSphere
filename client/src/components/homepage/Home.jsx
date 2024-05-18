@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 
 const Home = (props) => {
-
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
     try {
@@ -17,7 +16,7 @@ const Home = (props) => {
       });
       // console.log
       console.log(response.data.posts);
-      setPosts(response.data.posts)
+      setPosts(response.data.posts);
     } catch (error) {
       console.log(error);
     }
@@ -35,13 +34,20 @@ const Home = (props) => {
     <div className="containerr">
       <Navbar />
       <div style={{ height: "1px" }}></div>
-      <div className="walll">
+      {post && <div className="walll">
         {posts.map((post) => {
-          return(
-            <Post pfp={"/profile.png"} user={post.user} post={post.description} time={post.time} photo={post.photo} id={post.userId}/>
-          )
+          return (
+            <Post
+              pfp={"/profile.png"}
+              user={post.user}
+              post={post.description}
+              time={post.time}
+              photo={post.photo}
+              id={post.userId}
+            />
+          );
         })}
-      </div>
+      </div>}
       <div style={{ height: "10px" }}></div>
     </div>
   );

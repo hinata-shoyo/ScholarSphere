@@ -15,7 +15,7 @@ const App = () => {
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/' element={<Home token={window.localStorage.getItem("token")}/>} />
-        <Route path='/user' element={<Profile/>} />
+        <Route path='/user/:id' element={<Profile/>} />
 
       </Routes>
     </Router>      

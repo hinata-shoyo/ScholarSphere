@@ -5,7 +5,6 @@ const {
   getStorage,
   getDownloadURL,
   uploadBytesResumable,
-  deleteObject,
 } = require("firebase/storage");
 const multer = require("multer");
 const firebaseConfig = require("../firebase/cloud.js");
@@ -30,14 +29,13 @@ const giveCurrentDateTime = () => {
 };
 
 Router.get("/", authUser, async (req, res) => {
-  const user = await User.findOne({ username: req.username });
-  res.json({ user });
+  try {
+    const user = await User.findOne({ username: req.username });
+    res.json({ user });
+  } catch (error) {
+    console.log(error);
+  }
 });
-
-Router.get("/:id", authUser, async (req, res) => {
-  const user = await User.findById(req.params.id)
-  res.json({user})
-})
 
 Router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
@@ -72,58 +70,18 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.put("/like/:id", authUser, async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  post.likes++;
-  post.save();
-  res.json({ msg: "success" });
-});
-
-Router.put("/unlike/:id", authUser, async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  post.likes--;
-  post.save();
-  res.json({ msg: "success" });
-});
-
-Router.get("/posts/:id", authUser, async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const posts = Post.find({ user: user._id });
-  res.json({ posts });
-});
-
-Router.put("/comment/:id", authUser, async (req, res) => {
-  const comment = req.body.comment;
-  console.log(req.body)
-  const post = await Post.findById(req.params.id);
-  const comments = [...post.comments, { comment:comment, by: req.username }];
-  const newPost = await Post.findByIdAndUpdate(req.params.id, {
-    comments: comments,
-  });
-  newPost
-    .save()
-    .then(res.json({ msg: "success" }))
-    .catch((e) => console.log(e));
-});
-
-Router.get("/comments/:id", authUser, async (req, res) => {
-  const post =await  Post.findById(req.params.id)
-  res.json({comments:post.comments})
-});
-
 Router.get("/posts", authUser, async (req, res) => {
   try {
     const posts = await Post.find();
     res.json({ posts });
-    
   } catch (error) {
-   res.json({msg: error}) 
+    res.json({ msg: error });
   }
 });
 
 Router.post("/post", authUser, upload.single("file"), async (req, res) => {
   const { description } = req.body;
-  const user = await User.findOne({username:req.username})
+  const user = await User.findOne({ username: req.username });
   const dateTime = giveCurrentDateTime();
   const storageref = ref(
     storage,
@@ -139,7 +97,7 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
   );
   const photo = await getDownloadURL(snapshot.ref);
   console.log("file uploaded successfully");
-  const userr = await Post.findOne({ username: req.username });
+  // const userr = await Post.findOne({ username: req.username });
   const time = new Date();
   const post = await Post.create({
     description,
@@ -147,7 +105,7 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
     time,
     user: req.username,
     userId: user._id,
-    propilePic:user.profilePicture
+    propilePic: user.profilePicture,
   });
   post
     .save()
@@ -197,6 +155,56 @@ Router.put("/update", authUser, upload.single("file"), async (req, res) => {
     .catch((e) => {
       console.error();
     });
+});
+
+Router.get("/users/:id", authUser, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json({ user });
+  } catch (error) {
+    console.log(error);
+  }
+});
+Router.put("/comment/:id", authUser, async (req, res) => {
+  const comment = req.body.comment;
+  console.log(req.body);
+  const post = await Post.findById(req.params.id);
+  const comments = [...post.comments, { comment: comment, by: req.username }];
+  const newPost = await Post.findByIdAndUpdate(req.params.id, {
+    comments: comments,
+  });
+  newPost
+    .save()
+    .then(res.json({ msg: "success" }))
+    .catch((e) => console.log(e));
+});
+
+Router.get("/comments/:id", authUser, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  res.json({ comments: post.comments });
+});
+
+Router.put("/like/:id", authUser, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  post.likes++;
+  post.save();
+  res.json({ msg: "success" });
+});
+
+Router.put("/unlike/:id", authUser, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  post.likes--;
+  post.save();
+  res.json({ msg: "success" });
+});
+
+Router.get("/getposts/:id", authUser, async (req, res) => {
+  try {
+    const posts = await Post.find({ userId: req.params.id });
+    res.json({ posts });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = Router;
