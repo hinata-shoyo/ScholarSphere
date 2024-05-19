@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import "./Profile.css";
-import { useLocation } from "react-router-dom";
+import "./Myprofile.css";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
+import { MdOutlineModeEdit } from "react-icons/md";
 import Post from "../post/Post";
 
-const Profile = (props) => {
+const MyProfile = (props) => {
   const [User, setUser] = useState({});
   const [posts, setPost] = useState([]);
-  const { state } = useLocation();
+
+
   const getData = async () => {
     try {
       const user = await axios.get(
-        `http://localhost:3000/user/users/${state.id}`,
+        `http://localhost:3000/user/`,
         {
           headers: {
             Authorization: `bearer ${window.localStorage.getItem("token")}`,
@@ -20,7 +21,7 @@ const Profile = (props) => {
         }
       );
       const post = await axios.get(
-        `http://localhost:3000/user/getposts/${state.id}`,
+        `http://localhost:3000/user/getposts/${user.data.user._id}`,
         {
           headers: {
             Authorization: `bearer ${window.localStorage.getItem("token")}`,
@@ -53,6 +54,7 @@ const Profile = (props) => {
         <p className="name">
           {User.firstName} {User.lastName}
         </p>
+        <MdOutlineModeEdit className="edit"  />
         <p className="username">{`Username: ${User.username}`}</p>
         <p className="uni">{`University: ${User.university}`}</p>
       </div>
@@ -76,4 +78,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default MyProfile;

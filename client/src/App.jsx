@@ -4,6 +4,7 @@ import Login from './components/login/Login';
 import Signup from './components/signup/Signup';
 import Home from './components/homepage/Home';
 import Profile from './components/profile/Profile';
+import MyProfile from './components/myProfile/MyProfile';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/' element={<Home token={window.localStorage.getItem("token")}/>} />
         <Route path='/user/:id' element={<Profile/>} />
+        <Route path='/myprofile' element={<MyProfile/>} />
 
       </Routes>
     </Router>      

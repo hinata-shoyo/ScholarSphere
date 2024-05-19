@@ -10,6 +10,10 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
+  const gotoProfile = () => {
+    window.location.href ="/myprofile"
+  }
+
   const getUser = async () => {
     try {
       const response = await axios.get("http://localhost:3000/user", {
@@ -38,7 +42,7 @@ const Navbar = () => {
         <button onClick={handleLogout} className="logout">
           Logout
         </button>
-        <img src={image} alt="pfp" className="pfp2" />
+        <img src={image} alt="pfp" className="pfp2" onClick={gotoProfile} />
       </div>
     </div>
   );

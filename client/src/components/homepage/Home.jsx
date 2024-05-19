@@ -33,12 +33,13 @@ const Home = (props) => {
   return (
     <div className="containerr">
       <Navbar />
+      {console.log(posts)}
       <div style={{ height: "1px" }}></div>
-      {post && <div className="walll">
+      {posts && <div className="walll">
         {posts.map((post) => {
           return (
             <Post
-              pfp={"/profile.png"}
+              pfp={post.profilePic}
               user={post.user}
               post={post.description}
               time={post.time}

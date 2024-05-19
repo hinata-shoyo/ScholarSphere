@@ -97,7 +97,6 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
   );
   const photo = await getDownloadURL(snapshot.ref);
   console.log("file uploaded successfully");
-  // const userr = await Post.findOne({ username: req.username });
   const time = new Date();
   const post = await Post.create({
     description,
@@ -105,7 +104,7 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
     time,
     user: req.username,
     userId: user._id,
-    propilePic: user.profilePicture,
+    profilePic: user.profilePicture,
   });
   post
     .save()
