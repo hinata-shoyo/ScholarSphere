@@ -62,7 +62,7 @@ const MyProfile = (props) => {
       </div>
       {posts && (
         <div className="walll">
-          {posts.map((post) => {
+          {posts.toReversed().map((post) => {
             return (
               <Post
                 key={post._id}

@@ -1,7 +1,7 @@
 .infoCard {
   background-color: white;
   display: grid;
-  box-shadow: 2px black;
+  /* box-shadow: 2px black; */
   width: 600px;
   border-radius: 25px;
   border: 2px solid rgb(188, 184, 184);

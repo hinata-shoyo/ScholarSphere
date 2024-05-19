@@ -3,6 +3,7 @@ import Post from "../post/Post";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Home.css";
+import Create from "../createPost/createPost";
 
 const Home = (props) => {
   const [posts, setPosts] = useState([]);
@@ -33,11 +34,14 @@ const Home = (props) => {
   return (
     <div className="containerr">
       <Navbar />
-      {console.log(posts)}
+      <div className="create">
+
+      <Create />
+      </div>
       <div style={{ height: "1px" }}></div>
       {posts && (
         <div className="walll">
-          {posts.map((post) => {
+          {posts.toReversed().map((post) => {
             return (
               <Post
                 key={post._id}

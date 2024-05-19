@@ -17,7 +17,6 @@ const Edit = (props) => {
       formData.append("firstName", firsName);
       formData.append("lastName", lastName);
       formData.append("university", university);
-      console.log(formData.file);
 
       const response = await axios.put(
         "http://localhost:3000/user/update",
