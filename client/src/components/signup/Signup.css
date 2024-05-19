@@ -3,7 +3,6 @@
 .divider:before {
   content: "";
   flex: 1;
-  /* height: 1px; */
   background: lavender;
 }
 .h-custom {

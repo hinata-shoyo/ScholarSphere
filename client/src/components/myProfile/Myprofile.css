@@ -5,11 +5,11 @@
 
 .infoCard {
   margin-top: 200px;
-  margin-left: 28vw;
+  margin-left: 25vw;
   background-color: white;
   display: grid;
   box-shadow: 2px black;
-  width: 800px;
+  width: 900px;
   border-radius: 25px;
   border: 2px solid rgb(188, 184, 184);
   box-shadow: 0 5px 20px rgba(249, 248, 248, 0.4);

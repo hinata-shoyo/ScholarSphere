@@ -121,6 +121,7 @@ Router.post("/post", authUser, upload.single("file"), async (req, res) => {
 
 Router.put("/update", authUser, upload.single("file"), async (req, res) => {
   const { firstName, lastName, university } = req.body;
+  // console.log(req.body.firstName)
   const dateTime = giveCurrentDateTime();
   const storageref = ref(
     storage,

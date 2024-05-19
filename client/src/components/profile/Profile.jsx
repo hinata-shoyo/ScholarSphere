@@ -60,7 +60,7 @@ const Profile = (props) => {
         {posts.map((post) => {
           return (
             <Post
-              pfp={"/profile.png"}
+              pfp={post.profilePic}
               user={post.user}
               post={post.description}
               time={post.time}

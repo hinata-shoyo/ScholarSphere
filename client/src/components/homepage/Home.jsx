@@ -35,20 +35,23 @@ const Home = (props) => {
       <Navbar />
       {console.log(posts)}
       <div style={{ height: "1px" }}></div>
-      {posts && <div className="walll">
-        {posts.map((post) => {
-          return (
-            <Post
-              pfp={post.profilePic}
-              user={post.user}
-              post={post.description}
-              time={post.time}
-              photo={post.photo}
-              id={post.userId}
-            />
-          );
-        })}
-      </div>}
+      {posts && (
+        <div className="walll">
+          {posts.map((post) => {
+            return (
+              <Post
+                key={post._id}
+                pfp={post.profilePic}
+                user={post.user}
+                post={post.description}
+                time={post.time}
+                photo={post.photo}
+                id={post.userId}
+              />
+            );
+          })}
+        </div>
+      )}
       <div style={{ height: "10px" }}></div>
     </div>
   );

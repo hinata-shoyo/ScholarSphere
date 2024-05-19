@@ -4,22 +4,24 @@ import axios from "axios";
 import Navbar from "../navbar/Navbar";
 import { MdOutlineModeEdit } from "react-icons/md";
 import Post from "../post/Post";
+import Edit from "./Edit";
 
 const MyProfile = (props) => {
   const [User, setUser] = useState({});
   const [posts, setPost] = useState([]);
+  const [popup, setPopup] = useState(false);
 
+  const handleEdit = () => {
+    setPopup(true);
+  };
 
   const getData = async () => {
     try {
-      const user = await axios.get(
-        `http://localhost:3000/user/`,
-        {
-          headers: {
-            Authorization: `bearer ${window.localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const user = await axios.get(`http://localhost:3000/user/`, {
+        headers: {
+          Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
       const post = await axios.get(
         `http://localhost:3000/user/getposts/${user.data.user._id}`,
         {
@@ -30,7 +32,6 @@ const MyProfile = (props) => {
       );
       setUser(user.data.user);
       setPost(post.data.posts);
-      console.log(posts.data.posts)
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +44,7 @@ const MyProfile = (props) => {
   return (
     <div className="containerrr">
       <Navbar />
-      <div style={{height:"20px"}}></div>
+      <div style={{ height: "20px" }}></div>
       <div className="infoCard">
         <img
           src={User.profilePicture}
@@ -54,26 +55,29 @@ const MyProfile = (props) => {
         <p className="name">
           {User.firstName} {User.lastName}
         </p>
-        <MdOutlineModeEdit className="edit"  />
+        <MdOutlineModeEdit className="edit" onClick={handleEdit} />
+        <Edit popup={popup} trigger={setPopup} />
         <p className="username">{`Username: ${User.username}`}</p>
         <p className="uni">{`University: ${User.university}`}</p>
       </div>
-      {posts && <div className="walll">
-        {posts.map((post) => {
-          return (
-            <Post
-              pfp={"/profile.png"}
-              user={post.user}
-              post={post.description}
-              time={post.time}
-              photo={post.photo}
-              id={post.userId}
-            />
-          );
-        })}
-
-      </div>}
-      <div style={{height:"493px"}}></div>
+      {posts && (
+        <div className="walll">
+          {posts.map((post) => {
+            return (
+              <Post
+                key={post._id}
+                pfp={post.profilePic}
+                user={post.user}
+                post={post.description}
+                time={post.time}
+                photo={post.photo}
+                id={post.userId}
+              />
+            );
+          })}
+        </div>
+      )}
+      <div style={{ height: "293px" }}></div>
     </div>
   );
 };

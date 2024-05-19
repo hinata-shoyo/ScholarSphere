@@ -11,11 +11,12 @@ import "./Signup.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
+import Alert from "../alert/alert";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState("");
   const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3000/user/login", {
@@ -41,14 +42,17 @@ const Signup = () => {
       console.log("logged in");
     } catch (error) {
       console.log(error.response.data.msg);
+      setError(error.response.data.msg)
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500);
     }
   };
 
   return (
     <MDBContainer
-      fluid
-      className=" mt-5"
-      style={{ backgroundColor: "lavender" }}
+    fluid
+    style={{ backgroundColor: "lavender" }}
     >
       <MDBRow>
         <MDBCol col="10" md="6" style={{ marginTop: "90px" }}>
@@ -59,7 +63,7 @@ const Signup = () => {
           />
         </MDBCol>
 
-        <MDBCol col="4" md="6" style={{ marginTop: "130px" }}>
+        <MDBCol col="4" md="6" style={{ marginTop: "160px" }}>
           <MDBInput
             style={{ marginTop: "90px", width: "50px !important" }}
             wrapperClass="mb-4 "
@@ -92,9 +96,10 @@ const Signup = () => {
           </div>
         </MDBCol>
       </MDBRow>
+      <Alert message={error}/>
       <div
         className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary"
-        style={{ position: "relative", marginTop: "210px" }}
+        style={{ position: "relative", marginTop: "260px" }}
       >
         <div className="text-white mb-3 mb-md-0">
           Copyright © 2024. All rights reserved.

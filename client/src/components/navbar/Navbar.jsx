@@ -23,7 +23,7 @@ const Navbar = () => {
       });
       setImage(response.data.user.profilePicture);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

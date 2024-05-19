@@ -11,11 +11,12 @@ import "./Login.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Alert from "../alert/alert";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -25,16 +26,22 @@ const Login = () => {
       });
       const token = response.data.token;
       window.localStorage.setItem("token", token);
-      window.location.href = "/"
+      window.location.href = "/";
       console.log("logged in");
     } catch (error) {
       console.log(error.response.data.msg);
+      setError(error.response.data.msg);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     }
   };
-  const navigate = useNavigate();
 
   return (
-    <MDBContainer fluid className=" mt-5 " style={{backgroundColor:"lavender"}}>
+    <MDBContainer
+      fluid
+      style={{ backgroundColor: "lavender" }}
+    >
       <MDBRow>
         <MDBCol col="10" md="6" style={{ marginTop: "90px" }}>
           <img
@@ -44,7 +51,7 @@ const Login = () => {
           />
         </MDBCol>
 
-        <MDBCol col="4" md="6" style={{ marginTop: "130px" }}>
+        <MDBCol col="4" md="6" style={{ marginTop: "160px" }}>
           <MDBInput
             style={{ marginTop: "90px", width: "50px !important" }}
             wrapperClass="mb-4 "
@@ -77,9 +84,10 @@ const Login = () => {
           </div>
         </MDBCol>
       </MDBRow>
+      <Alert message={error} />
       <div
         className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary"
-        style={{ position: "relative", marginTop: "210px" }}
+        style={{ position: "relative", marginTop: "260px" }}
       >
         <div className="text-white mb-3 mb-md-0">
           Copyright © 2024. All rights reserved.
