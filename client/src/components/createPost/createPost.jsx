@@ -16,7 +16,7 @@ const Create = (props) => {
           formData.append("description", desc);
     
           const response = await axios.post(
-            "http://localhost:3000/user/post",
+            "https://scholar-sphere-puce.vercel.app/user/post",
             formData,
             {
               headers: {

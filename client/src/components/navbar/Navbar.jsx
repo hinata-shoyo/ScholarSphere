@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/user", {
+      const response = await axios.get("https://scholar-sphere-puce.vercel.app/user", {
         headers: {
           Authorization: `bearer ${window.localStorage.getItem("token")}`,
         },

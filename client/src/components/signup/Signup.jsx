@@ -19,7 +19,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
+      const response = await axios.post("https://scholar-sphere-puce.vercel.app/user/login", {
         username,
         password,
       });
@@ -34,7 +34,7 @@ const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/user/signup", {
+      const response = await axios.post("https://scholar-sphere-puce.vercel.app/user/signup", {
         username,
         password,
       });

@@ -19,7 +19,7 @@ const Edit = (props) => {
       formData.append("university", university);
 
       const response = await axios.put(
-        "http://localhost:3000/user/update",
+        "https://scholar-sphere-puce.vercel.app/user/update",
         formData,
         {
           headers: {

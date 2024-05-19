@@ -20,7 +20,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
+      const response = await axios.post("https://scholar-sphere-puce.vercel.app/user/login", {
         username,
         password,
       });

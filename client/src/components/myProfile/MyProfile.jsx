@@ -17,13 +17,13 @@ const MyProfile = (props) => {
 
   const getData = async () => {
     try {
-      const user = await axios.get(`http://localhost:3000/user/`, {
+      const user = await axios.get(`https://scholar-sphere-puce.vercel.app/user/`, {
         headers: {
           Authorization: `bearer ${window.localStorage.getItem("token")}`,
         },
       });
       const post = await axios.get(
-        `http://localhost:3000/user/getposts/${user.data.user._id}`,
+        `https://scholar-sphere-puce.vercel.app/user/getposts/${user.data.user._id}`,
         {
           headers: {
             Authorization: `bearer ${window.localStorage.getItem("token")}`,

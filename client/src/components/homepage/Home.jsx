@@ -10,7 +10,7 @@ const Home = (props) => {
 
   const getPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/user/posts", {
+      const response = await axios.get("https://scholar-sphere-puce.vercel.app/user/posts", {
         headers: {
           Authorization: `bearer ${window.localStorage.getItem("token")}`,
         },
