@@ -10,7 +10,7 @@
 }
 
 .desc{
-    width: 28vw;
+    width: 29vw;
     /* margin-right: 40px; */
   padding: 12px 20px;
   margin: 18px 20px;
@@ -36,7 +36,7 @@
 .send{
     font-size: large;
     height: 40px;
-    margin-left: 500px;
+    margin-left: 26vw;
     margin-bottom: 15px;
 }
 
