@@ -2,7 +2,7 @@
 .createpost{
     background-color: #0f4860;
     /* border: 1px solid black; */
-    width:max-content ;
+    width:32vw ;
     height: 200px;
     border-radius: 20px;
      border: 1px solid rgba(188, 184, 184, 0.603);
@@ -10,7 +10,7 @@
 }
 
 .desc{
-    width: 550px;
+    width: 28vw;
     /* margin-right: 40px; */
   padding: 12px 20px;
   margin: 18px 20px;
