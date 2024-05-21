@@ -6,9 +6,9 @@
 .details {
   display: grid;
   gap: 5px;
-  width: 600px;
+  width: 30vw;
   border: 1px solid rgba(255, 255, 255, 0.434);
-height: inherit;
+height: fit-content;
   /* height: 160px; */
   background-color: #0f4860;
 }
@@ -55,7 +55,7 @@ height: inherit;
 
 .Photo {
   border: 1px solid rgba(255, 255, 255, 0.434);
-  width: 600px;
+  width: 30vw;
   height: fit-content;
   /* width: fit-content; */
   /* height: 650px; */
@@ -66,13 +66,13 @@ height: inherit;
 
 .post {
   /* width:min-content; */
-  width: 598px;;
+  width: 29.899vw;;
   /* height: inherit; */
   
 }
 
 .like {
-  width: 600px;
+  width: 30vw;
   background-color: #0f4860;
   :hover{
     color: dimgray;

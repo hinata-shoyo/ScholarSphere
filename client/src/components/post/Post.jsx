@@ -2,6 +2,7 @@ import "./Post.css";
 import { BiLike, BiCommentDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
+
 const Post = (props) => {
   return (
     <>
