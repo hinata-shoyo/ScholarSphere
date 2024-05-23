@@ -72,6 +72,8 @@ const MyProfile = (props) => {
                 time={post.time}
                 photo={post.photo}
                 id={post.userId}
+                delete={true}
+                postId={post._id}
               />
             );
           })}

@@ -165,6 +165,15 @@ Router.get("/users/:id", authUser, async (req, res) => {
     console.log(error);
   }
 });
+Router.delete("/delete/:id", authUser, async (req, res) => {
+  try {
+    console.log("here");
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({ msg: "deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
 Router.put("/comment/:id", authUser, async (req, res) => {
   const comment = req.body.comment;
   console.log(req.body);
@@ -177,7 +186,7 @@ Router.put("/comment/:id", authUser, async (req, res) => {
     .save()
     .then(res.json({ msg: "success" }))
     .catch((e) => console.log(e));
-});
+  });
 
 Router.get("/comments/:id", authUser, async (req, res) => {
   const post = await Post.findById(req.params.id);
@@ -206,5 +215,6 @@ Router.get("/getposts/:id", authUser, async (req, res) => {
     console.log(error);
   }
 });
+
 
 module.exports = Router;

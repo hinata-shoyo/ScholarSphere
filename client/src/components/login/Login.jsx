@@ -26,7 +26,7 @@ const Login = () => {
       });
       const token = response.data.token;
       window.localStorage.setItem("token", token);
-      window.location.href = "/";
+      window.location.href = "/my";
       console.log("logged in");
     } catch (error) {
       console.log(error.response.data.msg);

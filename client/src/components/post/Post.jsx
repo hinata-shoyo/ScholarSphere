@@ -1,9 +1,32 @@
 import "./Post.css";
 import { BiLike, BiCommentDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import {RiDeleteBin6Line} from "react-icons/ri"
+import axios from "axios";
 
 
 const Post = (props) => {
+
+  const handleDelete = async () => {
+    
+    try {
+      
+      const response = await axios.delete(`http://localhost:3000/user/delete/${props.postId}`,
+      {
+        headers:{
+          Authorization: `bearer ${window.localStorage.getItem("token")}`
+        }
+      })
+      console.log(response.data.msg)
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+    
+
+
+  }
+
   return (
     <>
       <div className="postwall">
@@ -13,12 +36,13 @@ const Post = (props) => {
             state={{ id: props.id }}
             className="pfp"
             style={{ width: "40px" }}
-          >
+          >{console.log(props.key)}
             <img className="pfp" src={props.pfp} alt="pfp" />
           </Link>
           <Link to={`/user/${props.id}`} state={{ id: props.id }}>
             <p className="user"> {props.user} </p>
           </Link>
+          {props.delete && <RiDeleteBin6Line className="delete" onClick={handleDelete}/>}
           <p className="time">{props.time}</p>
           {props.post && <p className="text">{props.post}</p>}
         </div>
