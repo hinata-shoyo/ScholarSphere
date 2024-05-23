@@ -11,7 +11,7 @@ const Post = (props) => {
     
     try {
       
-      const response = await axios.delete(`http://localhost:3000/user/delete/${props.postId}`,
+      const response = await axios.delete(`https://scholar-sphere-puce.vercel.app/user/delete/${props.postId}`,
       {
         headers:{
           Authorization: `bearer ${window.localStorage.getItem("token")}`
