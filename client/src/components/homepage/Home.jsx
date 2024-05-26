@@ -4,9 +4,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Home.css";
 import Create from "../createPost/createPost";
+import Loading from "../alert/Loading";
 
 const Home = (props) => {
   const [posts, setPosts] = useState([]);
+    const [isHide, setIsHide] = useState(true)
+
 
   const getPosts = async () => {
     try {
@@ -29,11 +32,16 @@ const Home = (props) => {
     }
 
     getPosts();
+     setTimeout(() => {
+      setIsHide(false)
+    }, 3000)
   }, []);
 
   return (
+    <>
     <div className="containerr">
       <Navbar />
+
       <div className="create">
 
       <Create />
@@ -41,6 +49,7 @@ const Home = (props) => {
       <div style={{ height: "1px" }}></div>
       {posts && (
         <div className="walll">
+          {isHide?<Loading/>:null}
           {posts.toReversed().map((post) => {
             return (
               <Post
@@ -59,6 +68,7 @@ const Home = (props) => {
       )}
       <div style={{ height: "10px" }}></div>
     </div>
+    </>
   );
 };
 

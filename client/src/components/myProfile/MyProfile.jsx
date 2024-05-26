@@ -5,11 +5,13 @@ import Navbar from "../navbar/Navbar";
 import { MdOutlineModeEdit } from "react-icons/md";
 import Post from "../post/Post";
 import Edit from "./Edit";
+import Loading from "../alert/Loading";
 
 const MyProfile = (props) => {
   const [User, setUser] = useState({});
   const [posts, setPost] = useState([]);
   const [popup, setPopup] = useState(false);
+  const [isHide, setIsHide] = useState(true)
 
   const handleEdit = () => {
     setPopup(true);
@@ -17,11 +19,14 @@ const MyProfile = (props) => {
 
   const getData = async () => {
     try {
-      const user = await axios.get(`https://scholar-sphere-puce.vercel.app/user/`, {
-        headers: {
-          Authorization: `bearer ${window.localStorage.getItem("token")}`,
-        },
-      });
+      const user = await axios.get(
+        `https://scholar-sphere-puce.vercel.app/user/`,
+        {
+          headers: {
+            Authorization: `bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      );
       const post = await axios.get(
         `https://scholar-sphere-puce.vercel.app/user/getposts/${user.data.user._id}`,
         {
@@ -39,11 +44,16 @@ const MyProfile = (props) => {
 
   useEffect(() => {
     getData();
+
+    setTimeout(() => {
+      setIsHide(false)
+    }, 3000)
   }, []);
 
   return (
     <div className="containerrr">
       <Navbar />
+      {isHide?<Loading/>:null}
       <div style={{ height: "20px" }}></div>
       <div className="infoCard">
         <img
