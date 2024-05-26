@@ -51,6 +51,7 @@ const Home = (props) => {
                 time={post.time}
                 photo={post.photo}
                 id={post.userId}
+                postId={post._id}
               />
             );
           })}

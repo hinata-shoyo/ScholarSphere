@@ -167,7 +167,6 @@ Router.get("/users/:id", authUser, async (req, res) => {
 });
 Router.delete("/delete/:id", authUser, async (req, res) => {
   try {
-    console.log("here");
     await Post.findByIdAndDelete(req.params.id);
     res.json({ msg: "deleted" });
   } catch (error) {

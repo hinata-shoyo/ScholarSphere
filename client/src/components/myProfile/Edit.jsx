@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Edit.css";
 import { MdCancelPresentation } from "react-icons/md";
 import axios from "axios";
+import { useEffect } from "react";
 
 const Edit = (props) => {
   const [firsName, setFirstName] = useState("");
@@ -34,6 +35,14 @@ const Edit = (props) => {
       console.log(error.response.data);
     }
   };
+
+useEffect(() => {
+    if (props.popup) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  }, [props.popup]);
 
   return props.popup ? (
     <div className="popup">

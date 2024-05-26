@@ -19,3 +19,6 @@
     right: 30px;
     /* z-index: 10; */
 }
+.modal-open{
+    overflow: hidden;
+}

@@ -1,0 +1,67 @@
+.commenttt{
+    height: 600px;
+}
+
+.commentsss{
+    overflow-y: scroll;
+    margin-top: 30px;
+    height: 450px;
+}
+
+.addComm{
+    position: absolute;
+    margin-bottom: 20px;
+    bottom: 0px;
+    width: inherit;
+}
+
+    
+input[type=comment] {
+  width: 75%;
+  padding: 10px 18px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.add{
+    height: 42px;
+    margin-left: 20px;
+
+}
+
+.comCard{
+    width: 100%;
+    /* border: 1px solid black; */
+    height: 90px;
+    background-color: #ccc;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.modal-open{
+    overflow: hidden;
+}
+
+.content{
+margin-left: 20px;
+
+}
+
+.byy{
+    cursor: pointer;
+    font-weight: bold;
+    color: rgba(11, 9, 9, 0.724);
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+.noCom{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    margin-top: 200px;
+    opacity: 70%;
+}
