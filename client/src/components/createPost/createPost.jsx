@@ -36,7 +36,8 @@ const Create = (props) => {
         <div className="createpost">
             <form encType="multpart/form-data" onSubmit={handleSubmit} >
             <input type="text" placeholder="Share a post..." className="desc" onChange={(e) => setDesc(e.target.value)}/>
-            <input type="file" className="photoo" onChange={(e) => setFile(e.target.files[0])}/>
+            <input type="file" className="photoo" id="file" onChange={(e) => setFile(e.target.files[0])}/>
+            <label for="file" className="label">select file</label>
             <button className="logout send">Post</button>
             </form>
         </div>

@@ -1,42 +1,97 @@
-
-.createpost{
-    background-color: #0f4860;
-    /* border: 1px solid black; */
-    width:32vw ;
-    height: 200px;
-    border-radius: 20px;
-     border: 1px solid rgba(188, 184, 184, 0.603);
-
+ .createpost {
+  background-color: #0f4860;
+  /* border: 1px solid black; */
+  width: 32vw;
+  height: 200px;
+  border-radius: 20px;
+  border: 1px solid rgba(188, 184, 184, 0.603);
 }
 
-.desc{
-    width: 29vw;
-    /* margin-right: 40px; */
+.desc {
+  width: 29vw;
+  /* margin-right: 40px; */
   padding: 12px 20px;
   margin: 18px 20px;
   box-sizing: border-box;
   border-radius: 20px;
-   border: 2px solid #ccc;
-   outline: none;
+  border: 2px solid #ccc;
+  outline: none;
+}
+
+.desc:focus {
+  border: 3px solid #755b5b86;
+}
+
+.photoo {
+  display: block;
+  margin: 10px;
+  margin-left: 22px;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  color: white;
+}
+
+.send {
+  font-size: large;
+  height: 40px;
+  margin-top: 38px;
+  margin-left: 26vw;
+  margin-bottom: 15px;
+}
+.label{
+      position: absolute;
+      width: 120px;
+      margin-left: 20px;
+      border: 1px solid rgb(229, 218, 218);
+      height: 40px;
+      border-radius: 20px;
+      background-color: #1583b2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
 
 }
 
-.desc:focus{
-     border: 3px solid #755b5b86;
-
-}
-
-.photoo{
-    display: block;
-    margin: 10px;
-    margin-left: 22px;
-    color: white;
-}
-
-.send{
-    font-size: large;
+@media screen and (max-width: 600px) {
+    .label {
+      display: flex;
+      position: absolute;
+      width: 120px;
+      margin-left: 20px;
+      border: 1px solid rgb(229, 218, 218);
+      height: 25px;
+      border-radius: 20px;
+      background-color: #1583b2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+    }
+    .createpost {
+    width: 80vw;
+    height: 130px;
+    background-color: #0f4860;
+    border: 1px solid rgba(188, 184, 184, 0.603);
+    border-radius: 20px;
+  }
+  .desc {
+    width: 68vw;
     height: 40px;
-    margin-left: 26vw;
-    margin-bottom: 15px;
+  }
+  .photoo {
+    margin-top: 0px;
+  }
+  .send {
+    font-size: small;
+    height: 25px;
+    margin-top: 0;
+    margin-left: 55vw;
+  }
 }
-

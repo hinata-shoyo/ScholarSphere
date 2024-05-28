@@ -66,7 +66,7 @@ height: fit-content;
 
 .post {
   /* width:min-content; */
-  width: 29.899vw;;
+  width: 29.899vw;
   /* height: inherit; */
   
 }
@@ -74,11 +74,11 @@ height: fit-content;
 .like {
   width: 30vw;
   background-color: #0f4860;
+  height: 50px;
+  display: grid;
   :hover{
     color: dimgray;
   }
-  height: 50px;
-  display: grid;
 }
 
 .thumbsup {
@@ -128,4 +128,24 @@ height: fit-content;
   grid-column: 16;
   grid-row: 1;
   margin-top: 20px;
+}
+
+@media screen and (max-width:600px) {
+    .postwall{
+      width: fit-content;
+    }
+    .Photo{
+      width: 80vw;
+    }
+    .post{
+      width: 80vw;
+    }
+    .like{
+      width: 80vw;
+    }
+
+    .details {
+      width: 80vw;
+      
+    }
 }
