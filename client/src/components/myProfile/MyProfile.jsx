@@ -56,6 +56,7 @@ const MyProfile = (props) => {
       {isHide?<Loading/>:null}
       <div style={{ height: "20px" }}></div>
       <div className="infoCard">
+        <MdOutlineModeEdit className="edit" onClick={handleEdit} />
         <img
           src={User.profilePicture}
           alt="pfp"
@@ -65,13 +66,12 @@ const MyProfile = (props) => {
         <p className="name">
           {User.firstName} {User.lastName}
         </p>
-        <MdOutlineModeEdit className="edit" onClick={handleEdit} />
         <Edit popup={popup} trigger={setPopup} />
         <p className="username">{`Username: ${User.username}`}</p>
         <p className="uni">{`University: ${User.university}`}</p>
       </div>
       {posts && (
-        <div className="walll">
+        <div className="wallll">
           {posts.toReversed().map((post) => {
             return (
               <Post

@@ -67,3 +67,58 @@ height: 40px;
   right: 10;
   z-index: 100000;
 }
+.wallll{
+    margin-left: 33vw;
+    margin-top: 200px;
+}
+
+@media screen and (max-width:600px){
+  .infoCard{
+    margin-top: 100px;
+    margin-left: 8vw;
+    width: 340px;
+    height: 420px;
+    display: block;
+
+  }
+  .pfp3{
+    grid-row: 1;
+    margin-left: 95px;
+    /* width: 100px; */
+    /* height: 100px; */
+    size: 200px;
+    margin-bottom: 0px;
+  }
+  .name{
+    /* margin-left: 20px; */
+    font-size: larger;
+    /* margin-left: 20vw; */
+    height: 20px;
+   text-align: center; 
+  }
+  .username{
+    grid-row: 3;
+    font-size: medium;
+    text-align: center;
+    
+  }
+  .edit{
+    /* grid-row: 2; */
+    position:absolute;
+    top: 90px;
+    right: 50px;
+    width: 30px;
+
+    
+  }
+  .uni{
+    grid-row: 4;
+    text-align: center;
+    font-size: medium;
+  }
+  .wallll{
+    margin-top: 80px;
+    margin-left: 10vw;
+  }
+  
+}
