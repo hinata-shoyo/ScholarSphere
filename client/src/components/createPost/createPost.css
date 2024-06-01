@@ -1,10 +1,12 @@
- .createpost {
-  background-color: #0f4860;
+.createpost {
+  /* background-color: #494141; */
+    background-color: #414040;
+
   /* border: 1px solid black; */
   width: 32vw;
   height: 200px;
   border-radius: 20px;
-  border: 1px solid rgba(188, 184, 184, 0.603);
+  border: 1px solid rgba(188, 184, 184, 0.212);
 }
 
 .desc {
@@ -14,7 +16,9 @@
   margin: 18px 20px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 2px solid #ccc;
+  border: 2px solid #cccccc59;
+  color: rgb(8, 8, 8);
+  background-color: rgba(165, 161, 161, 0.836);
   outline: none;
 }
 
@@ -42,39 +46,45 @@
   margin-left: 26vw;
   margin-bottom: 15px;
 }
-.label{
-      position: absolute;
-      width: 120px;
-      margin-left: 20px;
-      border: 1px solid rgb(229, 218, 218);
-      height: 40px;
-      border-radius: 20px;
-      background-color: #1583b2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      cursor: pointer;
+.label {
+  position: absolute;
+  width: 120px;
+  margin-left: 20px;
+  border: 1px solid rgb(229, 218, 218);
+  height: 40px;
+  border-radius: 20px;
+  background-color: #817a7ae5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.label:hover{
+  background-color: rgb(150, 142, 142);
+  transition-duration: 0.2s;
+      box-shadow: 1px 1px 1px 0px rgba(255, 255, 255, 0.274);
 
 }
 
 @media screen and (max-width: 600px) {
-    .label {
-      display: flex;
-      position: absolute;
-      width: 120px;
-      margin-left: 20px;
-      border: 1px solid rgb(229, 218, 218);
-      height: 25px;
-      border-radius: 20px;
-      background-color: #1583b2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      cursor: pointer;
-    }
-    .createpost {
+  .label {
+    display: flex;
+    position: absolute;
+    width: 120px;
+    margin-left: 20px;
+    border: 1px solid rgb(229, 218, 218);
+    height: 25px;
+    border-radius: 20px;
+    background-color: #1583b2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+  }
+  .createpost {
     width: 80vw;
     height: 130px;
     background-color: #0f4860;

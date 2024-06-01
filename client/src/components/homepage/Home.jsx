@@ -34,7 +34,7 @@ const Home = (props) => {
     getPosts();
      setTimeout(() => {
       setIsHide(false)
-    }, 3000)
+    }, 4000)
   }, []);
 
   return (

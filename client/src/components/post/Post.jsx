@@ -33,18 +33,17 @@ const Post = (props) => {
           <Link
             to={`/user/${props.id}`}
             state={{ id: props.id }}
-            className="pfp"
             style={{ width: "40px" }}
           >
             <img className="pfp" src={props.pfp} alt="pfp" />
           </Link>
-          <Link to={`/user/${props.id}`} state={{ id: props.id }}>
-            <p className="user"> {props.user} </p>
+          <Link to={`/user/${props.id}`} state={{ id: props.id }} className="user">
+            <p > {props.user} </p>
           </Link>
           {props.delete && (
             <RiDeleteBin6Line className="delete" onClick={handleDelete} />
           )}
-          <p className="time">{props.time}</p>
+          {/* <p className="time">{props.time}</p> */}
           {props.post && <p className="text">{props.post}</p>}
         </div>
         {props.photo && (

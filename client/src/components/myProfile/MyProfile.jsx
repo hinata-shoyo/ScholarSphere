@@ -47,7 +47,7 @@ const MyProfile = (props) => {
 
     setTimeout(() => {
       setIsHide(false)
-    }, 3000)
+    }, 4000)
   }, []);
 
   return (
